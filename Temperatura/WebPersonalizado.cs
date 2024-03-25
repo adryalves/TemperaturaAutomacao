@@ -350,24 +350,32 @@ namespace Temperatura
                 }
 
                 IList<IWebElement> linkItems = webElement.FindElements(By.TagName("li"));
+                string tempMinima = "0";
+                string tempMaxima = "0";
 
 
-                List<string> topics = new List<string>();
+
                 foreach (IWebElement item in linkItems)
                 {
-                    IWebElement spansInsideLi = item.FindElement(By.XPath("/html/body/ul/li/div"));
-                    topics.Add(spansInsideLi.Text);
+
+
+                    IWebElement spansInsideLi = item.FindElement(By.TagName("div"));
 
 
                     if (spansInsideLi.Text.Contains(cidade))
                     {
                         item.Click();
+                        tempMinima = GetValue(TypeElement.Xpath, "/html/body/div[3]/div[3]/div[2]/div/div[2]/div/div/div/div[2]/div[1]/div[2]/div[2]/div[1]/b").Value.ToString();
+                        tempMaxima = GetValue(TypeElement.Xpath, "/html/body/div[3]/div[3]/div[2]/div/div[2]/div/div/div/div[2]/div[1]/div[2]/div[3]/div[1]/b").Value.ToString();
+                        Console.WriteLine("A temperatura mínima da cidade " + cidade + " é: " + tempMinima);
+                        Console.WriteLine("A temperatura máxima da cidade " + cidade + " é: " + tempMaxima);
                         Thread.Sleep(2000);
-                        break;
+
                     }
 
                 }
 
+                
 
                 return new EasyReturn.Web
                 {

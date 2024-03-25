@@ -22,12 +22,19 @@ namespace Temperatura
         {
             Navigate("https://portal.inmet.gov.br/");
 
-            var cidade = "Leopoldina";
 
-            Click(TypeElement.Id, "search");
-            AssignValue(TypeElement.Id, "search", cidade);
-            Thread.Sleep(7000);
-            SelecionaItem(TypeElement.Id, "ui-id-1", cidade);
+            var cidades = new List<string> { "Caaporã", "Caatiba", "Viana", "Belágua", "Leopoldina" };
+
+
+            foreach (var cidade in cidades)
+            {
+                Click(TypeElement.Id, "search");
+                AssignValue(TypeElement.Id, "search", cidade);
+                Thread.Sleep(7000);
+                SelecionaItem(TypeElement.Id, "ui-id-1", cidade);
+            }
+
+            
 
 
         }
